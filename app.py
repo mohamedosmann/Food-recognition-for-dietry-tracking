@@ -14,7 +14,6 @@ load_dotenv()
 
 # Configure Google Gemini API
 genai.configure(api_key=os.getenv("GENAI_API_KEY"))
-model = genai.GenerativeModel('gemini-pro-vision')
 
 def get_gemini_response(input, image, prompt):
     response = model.generate_content([input, image[0], prompt])
@@ -36,7 +35,6 @@ def input_image_details(uploaded_file):
 def init_db():
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
-    # Create users table if it doesn't exist
     c.execute('''
         CREATE TABLE IF NOT EXISTS users (
             username TEXT PRIMARY KEY,
@@ -45,7 +43,6 @@ def init_db():
             profile_picture TEXT
         )
     ''')
-    # Create scan_history table with the correct schema
     c.execute('''
         CREATE TABLE IF NOT EXISTS scan_history (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -66,7 +63,6 @@ def init_db():
 def update_db_schema():
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
-    # Check if profile_picture column exists
     c.execute("PRAGMA table_info(users)")
     columns = [info[1] for info in c.fetchall()]
     if 'profile_picture' not in columns:
