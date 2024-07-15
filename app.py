@@ -138,11 +138,12 @@ if "page" not in st.session_state:
 
 # Function to load images from URL
 def load_image(url):
-    if not url.startswith(("http://", "https://")):
-        raise ValueError("URL must start with http:// or https://")
-    print(f"Loading image from URL: {url}")
-    response = requests.get(url)
-    return Image.open(BytesIO(response.content))
+    if url.startswith(("http://", "https://")):
+        print(f"Loading image from URL: {url}")
+        response = requests.get(url)
+        return Image.open(BytesIO(response.content))
+    else:
+        return Image.open(url)
 
 # Home page with advanced layout
 def home_page():
