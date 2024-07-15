@@ -321,7 +321,7 @@ def main_app():
     You have to identify different types of food in images. 
     The system should accurately detect and label various foods displayed in the image, providing the name 
     of the food and its location within the image (e.g., bottom left, right corner, etc.). The output should include a comprehensive report or display showing the
-    identified foods, their positions, names, and corresponding dietary details.
+    identified foods, their positions, names, and corresponding dietary details also display them as image and the calroies, protein, fat etc as numbers.
     """
 
     if submit and uploaded_file is not None:
