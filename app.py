@@ -136,15 +136,6 @@ if "username" not in st.session_state:
 if "page" not in st.session_state:
     st.session_state.page = "Home"
 
-# Function to load images from URL
-def load_image(url):
-    if url.startswith(("http://", "https://")):
-        print(f"Loading image from URL: {url}")
-        response = requests.get(url)
-        return Image.open(BytesIO(response.content))
-    else:
-        return Image.open(url)
-
 # Home page with advanced layout
 def home_page():
     st.markdown(
@@ -220,8 +211,8 @@ def home_page():
                 st.experimental_rerun()
         st.markdown("</div>", unsafe_allow_html=True)
         
-        st.image(load_image("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgy52YPHqzGhOKGQTNY6zN8FPyt857X73sBZv5N1LzWR97dkSPIdvrNvrlw5yPPWasoM2ZCKbviQsx_xhXro0ZOWYndFFGKFSgRrp9rqUh5_KKCsXZ9FztGCdzj8kT-LOQz2X6-OiecHZZa64IrffbagDRo9RhoFWyjkmJmBR2PIB33qsMbUuBhxAxvr-rq/s2240/food_scan_image.jpg"), caption="Dietary Tracking System")
-        st.image(load_image("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIo6GFeyJepS6WUxR0uVGbScbCy7hWSjz_DczgokyNu0D-f7dKK3ecNfOCmMg88RJ-U0VALQ_KxDQl6iIVsiAmvGXNcmjX_s3eoZSSYMe4GUO_XoX-XF6pJ8NMqbuM30Ovq8Von6NQGSkdnv_B5DxGxBy1ySM7g_M6nMVvtXe9izzHB5LXr7OdkUKXbZ2x/s1366/homepage.png"), caption="Home Page Image")
+        st.image("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgy52YPHqzGhOKGQTNY6zN8FPyt857X73sBZv5N1LzWR97dkSPIdvrNvrlw5yPPWasoM2ZCKbviQsx_xhXro0ZOWYndFFGKFSgRrp9rqUh5_KKCsXZ9FztGCdzj8kT-LOQz2X6-OiecHZZa64IrffbagDRo9RhoFWyjkmJmBR2PIB33qsMbUuBhxAxvr-rq/s2240/food_scan_image.jpg", caption="Dietary Tracking System")
+        st.image("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIo6GFeyJepS6WUxR0uVGbScbCy7hWSjz_DczgokyNu0D-f7dKK3ecNfOCmMg88RJ-U0VALQ_KxDQl6iIVsiAmvGXNcmjX_s3eoZSSYMe4GUO_XoX-XF6pJ8NMqbuM30Ovq8Von6NQGSkdnv_B5DxGxBy1ySM7g_M6nMVvtXe9izzHB5LXr7OdkUKXbZ2x/s1366/homepage.png", caption="Home Page Image")
 
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -291,8 +282,8 @@ def profile_page():
     st.title("Profile")
     user = get_user(st.session_state["username"])
     if user:
-        profile_picture_path = user[3] if user[3] else "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjiJ2fA_6qbVyMQYmadZvugF7fOmZqdVJdDP9-KznNQoaD9NaRuxzeHh5h_xThENPV1dq-SpQny5Gvts5HkD_ajrhz5ZvHtKhyphenhyphenjPMTHgt7xOn_HzPzLYjIXRknb7wQvnBW5Bigy_Y1h2AECvodR-21upP2jOUYDO8Cbp3SSK9xDKU1te4yOyw1ZpW0kU0B_/s200/default_profile_picture.jpg"
-        st.image(load_image(profile_picture_path), caption="Profile Picture", width=150)
+        profile_picture_path = user[3] if user[3] else "No profile picture uploaded"
+        st.write(f"Profile Picture Path: {profile_picture_path}")
 
         uploaded_file = st.file_uploader("Upload a new profile picture", type=["jpg", "jpeg", "png"])
         if uploaded_file is not None:
