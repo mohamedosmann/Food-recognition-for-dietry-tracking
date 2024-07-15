@@ -89,13 +89,6 @@ def get_user(username):
     conn.close()
     return user
 
-def update_profile_picture(username, profile_picture_path):
-    conn = sqlite3.connect('database.db')
-    c = conn.cursor()
-    c.execute('UPDATE users SET profile_picture = ? WHERE username = ?', (profile_picture_path, username))
-    conn.commit()
-    conn.close()
-
 def verify_password(username, password):
     user = get_user(username)
     if user and bcrypt.checkpw(password.encode('utf-8'), user[2]):
@@ -300,15 +293,6 @@ def profile_page():
                 st.image(load_image(profile_picture_path), caption="Profile Picture", width=150)
             except FileNotFoundError:
                 st.image(default_profile_picture, caption="Profile Picture", width=150)
-
-        uploaded_file = st.file_uploader("Upload a new profile picture", type=["jpg", "jpeg", "png"])
-        if uploaded_file is not None:
-            profile_picture_path = os.path.join("C:/Users/yusuo/Downloads/", uploaded_file.name)
-            with open(profile_picture_path, "wb") as f:
-                f.write(uploaded_file.getbuffer())
-            update_profile_picture(st.session_state["username"], profile_picture_path)
-            st.success("Profile picture updated successfully!")
-            st.experimental_rerun()
 
         st.write(f"Username: {user[0]}")
         st.write(f"Name: {user[1]}")
