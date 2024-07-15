@@ -1,0 +1,13 @@
+credentials:
+  usernames:
+    user1:
+      name: John Doe
+      password: $2b$12$KIXZ5E0j6r6nTbb9iJl0XeIc8X/7D5M9xv1W2uTpEh1IDkvFkYs8y  # example hashed password
+
+cookie:
+  expiry_days: 30
+  name: streamlit_auth
+  key: some_random_key  # Secret key for cookie encryption
+
+preauthorized:
+  emails: []
