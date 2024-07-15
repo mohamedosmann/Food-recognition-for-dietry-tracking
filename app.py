@@ -137,6 +137,9 @@ if "page" not in st.session_state:
 
 # Function to load images from URL
 def load_image(url):
+    if not url.startswith(("http://", "https://")):
+        raise ValueError("URL must start with http:// or https://")
+    print(f"Loading image from URL: {url}")
     response = requests.get(url)
     return Image.open(BytesIO(response.content))
 
@@ -216,7 +219,7 @@ def home_page():
         st.markdown("</div>", unsafe_allow_html=True)
         
         st.image(load_image("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgy52YPHqzGhOKGQTNY6zN8FPyt857X73sBZv5N1LzWR97dkSPIdvrNvrlw5yPPWasoM2ZCKbviQsx_xhXro0ZOWYndFFGKFSgRrp9rqUh5_KKCsXZ9FztGCdzj8kT-LOQz2X6-OiecHZZa64IrffbagDRo9RhoFWyjkmJmBR2PIB33qsMbUuBhxAxvr-rq/s2240/food_scan_image.jpg"), caption="Dietary Tracking System")
-        st.image(load_image("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIo6GFeyJepS6WUxR0uVGbScbCy7hWSjz_DczgokyNu0D-f7dKK3ecNfOCmMg88RJ-U0VALQ_KxDQl6iIVsiAmvGXNcmjX_s3eoZSSYMe4GUO_XoX-XF6pJ8NMqbuM30Ovq8Von6NQGSkdnv_B5DxGxBy1ySM7g_M6nMVvtXe9izzHB5LXr7OdkUKXbZ2x/s1366/homepage.png"), caption="")
+        st.image(load_image("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIo6GFeyJepS6WUxR0uVGbScbCy7hWSjz_DczgokyNu0D-f7dKK3ecNfOCmMg88RJ-U0VALQ_KxDQl6iIVsiAmvGXNcmjX_s3eoZSSYMe4GUO_XoX-XF6pJ8NMqbuM30Ovq8Von6NQGSkdnv_B5DxGxBy1ySM7g_M6nMVvtXe9izzHB5LXr7OdkUKXbZ2x/s1366/homepage.png"), caption="Home Page Image")
 
         st.markdown("</div>", unsafe_allow_html=True)
 
